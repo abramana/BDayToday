@@ -17,4 +17,22 @@ public class BirthdayRepository : IBirthdayRepository
     {
         return await _ctx.Birthdays.ToListAsync();
     }
+
+    public async Task<bool> Create(Birthday birthday)
+    {
+        _ctx.Birthdays.Add(birthday);
+        return await _ctx.SaveChangesAsync() > 0;    
+    }
+
+    public async Task<bool> Update(Birthday birthday)
+    {
+        _ctx.Birthdays.Update(birthday);
+        return await _ctx.SaveChangesAsync() > 0;
+    }
+
+    public async Task<bool> Delete(Birthday birthday)
+    {
+        _ctx.Birthdays.Remove(birthday);
+        return await _ctx.SaveChangesAsync() > 0;
+    }
 }

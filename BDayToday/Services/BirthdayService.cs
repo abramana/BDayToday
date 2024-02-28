@@ -16,4 +16,19 @@ public class BirthdayService : IBirthdayService
     {
         return await _repository.Get();
     }
+
+    public async Task<bool> CreateAsync(Birthday birthday)
+    {
+        return await _repository.Create(birthday);
+    }
+
+    public async Task<bool> UpdateAsync(Birthday birthday)
+    {
+        return await _repository.Update(birthday);
+    }
+
+    public async Task<bool> DeleteAsync(Birthday birthday)
+    {
+        return await _repository.Delete(birthday);
+    }
 }
