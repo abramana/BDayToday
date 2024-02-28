@@ -1,4 +1,5 @@
 using BDayToday.Endpoints.Internal;
+using BDayToday.Services;
 
 namespace BDayToday.Endpoints;
 
@@ -6,14 +7,17 @@ public class LibraryEndpoints : IEndpoints
 {
     public static void DefineEndpoints(IEndpointRouteBuilder app)
     {
-        //endpoints: 
-
-        //app.MapGet("get", () => "Get");
-        //app.MapPost(...)
+        app.MapGet("birthday", GetAllBirthdaysAsync);
     }
 
     public static void AddServices(IServiceCollection services, IConfiguration configuration)
     {
-        throw new NotImplementedException();
+    }
+
+    internal static async Task<IResult> GetAllBirthdaysAsync(
+        IBirthdayService birthdayService, string? searchTerm)
+    {
+        var birthdays = await birthdayService.GetAllAsync();
+        return Results.Ok(birthdays);
     }
 }

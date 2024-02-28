@@ -8,19 +8,15 @@ public static class EndpointExtensions
     {
         AddEndpoints(services, typeof(TMarker), configuration);
     }
-    
+
     public static void AddEndpoints(this IServiceCollection services, Type typeMarker, IConfiguration configuration)
     {
         var endpointTypes = GetEndpointTypesFromAssemblyContaining(typeMarker);
 
         foreach (var endpointType in endpointTypes)
-        {
             endpointType.GetMethod(nameof(IEndpoints.AddServices))!.Invoke(null,
                 new object[] { services, configuration });
-        }
     }
-
-
 
     public static void UseEndpoints<TMarker>(this IApplicationBuilder app)
     {
@@ -32,12 +28,10 @@ public static class EndpointExtensions
         var endpointTypes = GetEndpointTypesFromAssemblyContaining(typeMarker);
 
         foreach (var endpointType in endpointTypes)
-        {
             endpointType.GetMethod(nameof(IEndpoints.DefineEndpoints))!.Invoke(null,
                 new object[] { app });
-        }
     }
-    
+
     private static IEnumerable<TypeInfo> GetEndpointTypesFromAssemblyContaining(Type typeMarker)
     {
         var endpointTypes = typeMarker.Assembly.DefinedTypes.Where(x =>
