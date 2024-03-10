@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="ClientApp\" />
+        <Folder Include="ClientApp\assets\" />
         <Folder Include="Validators\" />
     </ItemGroup>
 
