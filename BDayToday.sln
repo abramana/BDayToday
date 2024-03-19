@@ -13,4 +13,7 @@ Global
 		{B411F7A1-40CE-4AEF-82B5-22BA236371A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B411F7A1-40CE-4AEF-82B5-22BA236371A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(RiderSharedRunConfigurations) = postSolution
+		File = .runConfigurations\StartUI.run.xml
+	EndGlobalSection
 EndGlobal
