@@ -1,47 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import Button from "./components/Button";
+import ScrollViewBDays from "./components/ScrollViewBDays";
 
-const persons = [
-  {
-    name: 'Nastya Abramova',
-    date: '29.08.1995'
-  },
-  {
-    name: 'Viktor Tumanov',
-    date: '30.05.1995'
-  },
-  {
-    name: 'Max Tumanov',
-    date: '30.05.1995'
-  },
-  {
-    name: 'Alice Tumanov',
-    date: '30.05.1995'
-  },
-  {
-    name: 'Marie Tumanov',
-    date: '30.05.1995'
-  },
-  {
-    name: 'Alex Tumanov',
-    date: '30.05.1995'
-  },
-]
 export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Birthday List</Text>
       <StatusBar style="auto" />
-      <ScrollView style={styles.scrollView} >
-        {persons.map((person) => {
-          return (
-              <View>
-                <Text style={styles.item}>{person.name} {person.date}</Text>
-              </View>
-          );
-        })}
-      </ScrollView>
+      <ScrollViewBDays></ScrollViewBDays>
       <Button title={'Add new'}></Button>
     </View>
   );
