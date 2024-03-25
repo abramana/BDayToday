@@ -3,9 +3,14 @@ using BDayToday.Endpoints.Internal;
 using BDayToday.Repositories;
 using BDayToday.Services;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseSerilog((ctx, sp, configuration) =>
+{
+    configuration.ReadFrom.Configuration(ctx.Configuration);
+});
 builder.Services.AddScoped<IBirthdayService, BirthdayService>();
 builder.Services.AddScoped<IBirthdayRepository, BirthdayRepository>();
 builder.Services.AddEndpoints<Program>(builder.Configuration);
@@ -20,6 +25,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 var app = builder.Build();
 
+app.UseSerilogRequestLogging();
 app.UseCors("AllowOrigin");
 app.UseEndpoints<Program>();
 

@@ -29,16 +29,16 @@ public class BirthdayEndpoints : IEndpoints
     }
 
     private static async Task<IResult> CreateBirthdayAsync(
-        [FromBody] Birthday birthday, [FromServices] IBirthdayService birthdayService)
+        [FromBody] BirthdayModel birthday, [FromServices] IBirthdayService birthdayService)
     {
         var created = await birthdayService.CreateAsync(birthday);
         return created
-            ? Results.Created($"/{BaseRoute}/{birthday.Name}", birthday)
+            ? Results.Created((string?)null, birthday)
             : Results.BadRequest("A person with this name already exists");
     }
 
     private static async Task<IResult> UpdateBirthdayAsync(
-        [FromBody] Birthday birthday, [FromServices] IBirthdayService birthdayService)
+        [FromBody] BirthdayModel birthday, [FromServices] IBirthdayService birthdayService)
     {
         var updated = await birthdayService.UpdateAsync(birthday);
         return updated
@@ -47,7 +47,7 @@ public class BirthdayEndpoints : IEndpoints
     }
 
     private static async Task<IResult> DeleteBirthdayAsync(
-        [FromBody] Birthday birthday, [FromServices] IBirthdayService birthdayService)
+        [FromBody] BirthdayModel birthday, [FromServices] IBirthdayService birthdayService)
     {
         var deleted = await birthdayService.DeleteAsync(birthday);
         return deleted

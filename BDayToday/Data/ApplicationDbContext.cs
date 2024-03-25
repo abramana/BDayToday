@@ -1,12 +1,14 @@
-using BDayToday.Models;
+using BDayToday.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BDayToday.Data;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext(DbContextOptions options) : DbContext(options)
 {
-    public ApplicationDbContext(DbContextOptions options) : base(options)
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        base.OnConfiguring(optionsBuilder);
+        optionsBuilder.EnableSensitiveDataLogging();
     }
 
     public DbSet<Birthday> Birthdays { get; set; } = null!;
