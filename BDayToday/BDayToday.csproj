@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="ClientApp\assets\" />
         <Folder Include="Validators\" />
     </ItemGroup>
 
@@ -22,6 +21,7 @@
         </PackageReference>
         <PackageReference Include="MySql.Data" Version="8.3.0" />
         <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
     </ItemGroup>
 
 </Project>

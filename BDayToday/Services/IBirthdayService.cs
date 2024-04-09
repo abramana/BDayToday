@@ -4,8 +4,8 @@ namespace BDayToday.Services;
 
 public interface IBirthdayService
 {
-    public Task<IEnumerable<Birthday>> GetAllAsync();
-    public Task<bool> CreateAsync(Birthday birthday);
-    public Task<bool> UpdateAsync(Birthday birthday);
-    public Task<bool> DeleteAsync(Birthday birthday);
+    public Task<IEnumerable<BirthdayModel>> GetAllAsync();
+    public Task<bool> CreateAsync(BirthdayModel birthday);
+    public Task<bool> UpdateAsync(BirthdayModel birthday);
+    public Task<bool> DeleteAsync(BirthdayModel birthday);
 }

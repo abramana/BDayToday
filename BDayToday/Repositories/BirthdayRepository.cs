@@ -1,4 +1,5 @@
 using BDayToday.Data;
+using BDayToday.Mappers;
 using BDayToday.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,26 +14,28 @@ public class BirthdayRepository : IBirthdayRepository
         _ctx = ctx;
     }
 
-    public async Task<List<Birthday>> Get()
+    public async Task<List<BirthdayModel>> Get()
     {
-        return await _ctx.Birthdays.ToListAsync();
+        return await _ctx.Birthdays
+            .Select(bday => bday.ToBirthdayModel())
+            .ToListAsync();
     }
 
-    public async Task<bool> Create(Birthday birthday)
+    public async Task<bool> Create(BirthdayModel birthday)
     {
-        _ctx.Birthdays.Add(birthday);
+        _ctx.Birthdays.Add(birthday.ToBirthday());
         return await _ctx.SaveChangesAsync() > 0;    
     }
 
-    public async Task<bool> Update(Birthday birthday)
+    public async Task<bool> Update(BirthdayModel birthday)
     {
-        _ctx.Birthdays.Update(birthday);
+        _ctx.Birthdays.Update(birthday.ToBirthday());
         return await _ctx.SaveChangesAsync() > 0;
     }
 
-    public async Task<bool> Delete(Birthday birthday)
+    public async Task<bool> Delete(BirthdayModel birthday)
     {
-        _ctx.Birthdays.Remove(birthday);
+        _ctx.Birthdays.Remove(birthday.ToBirthday());
         return await _ctx.SaveChangesAsync() > 0;
     }
 }
