@@ -12,6 +12,7 @@ public class BirthdayEndpoints : IEndpoints
     public static void DefineEndpoints(IEndpointRouteBuilder app)
     {
         app.MapGet(BaseRoute, GetAllBirthdaysAsync);
+        app.MapGet(BaseRoute + "/{id}", GetBirthdayByIdAsync);
         app.MapPost(BaseRoute, CreateBirthdayAsync);
         app.MapPut(BaseRoute, UpdateBirthdayAsync);
         app.MapDelete(BaseRoute, DeleteBirthdayAsync);
@@ -26,6 +27,15 @@ public class BirthdayEndpoints : IEndpoints
     {
         var birthdays = await birthdayService.GetAllAsync();
         return Results.Ok(birthdays);
+    }
+    
+    private static async Task<IResult> GetBirthdayByIdAsync(
+        [FromRoute] int id, [FromServices] IBirthdayService birthdayService)
+    {
+        var birthday = await birthdayService.GetByIdAsync(id);
+        return birthday is not null
+            ? Results.Ok(birthday)
+            : Results.NotFound();
     }
 
     private static async Task<IResult> CreateBirthdayAsync(

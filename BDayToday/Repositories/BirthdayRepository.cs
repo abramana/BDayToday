@@ -21,6 +21,14 @@ public class BirthdayRepository : IBirthdayRepository
             .ToListAsync();
     }
 
+    public async Task<BirthdayModel?> GetById(int id)
+    {
+        return await _ctx.Birthdays
+            .Where(bday => bday.Id == id)
+            .Select(bday => bday.ToBirthdayModel())
+            .SingleOrDefaultAsync();    
+    }
+
     public async Task<bool> Create(BirthdayModel birthday)
     {
         _ctx.Birthdays.Add(birthday.ToBirthday());

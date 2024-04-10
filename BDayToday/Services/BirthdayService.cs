@@ -17,6 +17,11 @@ public class BirthdayService : IBirthdayService
         return await _repository.Get();
     }
 
+    public async Task<BirthdayModel?> GetByIdAsync(int id)
+    {
+        return await _repository.GetById(id);
+    }
+
     public async Task<bool> CreateAsync(BirthdayModel birthday)
     {
         return await _repository.Create(birthday);
