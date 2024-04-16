@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
         marginHorizontal: 20,
         marginTop: 10,
         marginBottom: 20,
-        maxHeight: 300,
+        maxHeight: 500,
+        width: "50%",
     }
 });

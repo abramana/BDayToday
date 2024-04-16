@@ -1,38 +1,37 @@
 import React from "react";
 import {View} from "react-native";
 import {DatePickerInput} from 'react-native-paper-dates';
-import {Button, TextInput} from 'react-native-paper';
-import {createBirthday} from "../services/CreateBirthday";
+import {Button, HelperText, Text, TextInput} from 'react-native-paper';
+import {createBirthday} from "../services/BirthdayService";
 
 type NewBirthdayProps = {}
 const NewBirthday = (props: NewBirthdayProps) => {
-    const [name, setName] = React.useState<string>('');
+    const [name, setName] = React.useState<string | undefined>(undefined);
     const [birthdate, setBirthdate] = React.useState<Date | undefined>(undefined);
 
     const handleSave = async () => {
-        try {
-            if (!birthdate) {
-                // Handle undefined
-                alert("Birthdate is undefined! Finish the validations already!!!");
-                return;
-            }
-            const response = await createBirthday(name, birthdate);
-        } catch (error) {
-            console.error('Error creating birthday:', error);
-        }
+        await createBirthday(name!, birthdate!);
     };
 
     return (
         <View>
-            <TextInput label="Name" value={name} onChangeText={setName}/>
+            <Text variant={"displayLarge"}>BDay everyday!</Text>
+            <TextInput label="Name" value={name} onChangeText={setName} maxLength={70}/>
+            <HelperText type="error" visible={!name}>
+                Name is required
+            </HelperText>
             <DatePickerInput
                 locale="cz-CS"
                 label="Birthdate"
                 value={birthdate}
                 onChange={(date) => setBirthdate(date)}
                 inputMode="start"
+                style={{width: 500}}
             />
-            <Button mode="contained" onPress={handleSave}>
+            <HelperText type="error" visible={!birthdate}>
+                Birthdate is required
+            </HelperText>
+            <Button mode="contained" onPress={handleSave} disabled={!name || !birthdate}>
                 Save
             </Button>
         </View>

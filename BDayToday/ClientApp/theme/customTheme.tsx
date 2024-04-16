@@ -1,4 +1,4 @@
-export const theme = {
+export const customTheme = {
     colors: {
         "primary": "rgb(196,92,27)",
         "onPrimary": "rgb(255, 255, 255)",
