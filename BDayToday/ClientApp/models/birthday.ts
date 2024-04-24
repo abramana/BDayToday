@@ -1,5 +1,5 @@
 export interface Birthday {
     id: number,
     name: string,
-    birthdate: Date
+    birthdate: Date | undefined
 }

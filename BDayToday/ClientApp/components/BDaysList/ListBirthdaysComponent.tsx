@@ -4,31 +4,27 @@ import {Text} from 'react-native-paper';
 import {styles} from "./Style";
 import {Birthday} from "../../models/birthday";
 import {getAllBirthdays} from "../../services/BirthdayService";
-import {NativeStackNavigationProp} from "@react-navigation/native-stack";
-import {RootStackParamList} from "../../App";
+import {NavigationProps} from "../../App";
+import {useFocusEffect} from "@react-navigation/native";
 
-type ProfileScreenNavigationProp = NativeStackNavigationProp<
-    RootStackParamList,
-    'Home'
->;
-
-interface Props {
+interface ListBirthdaysComponentProps {
     searchQuery: string;
-    navigation: ProfileScreenNavigationProp;
+    navigation: NavigationProps;
 }
 
-export default function BDaysList({navigation, searchQuery}: Props): ReactNode {
+export default function ListBirthdaysComponent({navigation, searchQuery}: ListBirthdaysComponentProps): ReactNode {
     const [birthdays, setBirthdays] = useState<Birthday[]>([]);
     const [filteredBirthdays, setFilteredBirthdays] = useState<Birthday[]>([]);
 
-    const handleBirthdayDetails = (birthday: Birthday) => {
-        navigation.navigate('BirthdayDetails', {index: birthday.id});
-    };
-    useEffect(() => {
-        getAllBirthdays()
-            .then(birthdays => setBirthdays(birthdays))
-            .catch(err => console.log(err))
-    }, []);
+    const handleBirthdayView = (birthday: Birthday) => navigation.navigate('ViewBirthdayScreen', {birthdayId: birthday.id});
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getAllBirthdays()
+                .then(birthdays => setBirthdays(birthdays))
+                .catch(err => console.log(err));
+        }, [])
+    );
 
     useEffect(() => {
         const filtered = birthdays.filter(birthday =>
@@ -41,8 +37,8 @@ export default function BDaysList({navigation, searchQuery}: Props): ReactNode {
         <ScrollView style={styles.scrollView}>
             {filteredBirthdays.map((birthday, index) => (
                 <View key={index}>
-                    <Text variant={"displayMedium"} onPress={() => handleBirthdayDetails(birthday)}>
-                        {birthday.name} - {birthday.birthdate.toLocaleDateString()} </Text>
+                    <Text variant={"displayMedium"} onPress={() => handleBirthdayView(birthday)}>
+                        {birthday.name} - {birthday.birthdate?.toLocaleDateString()} </Text>
                 </View>
             ))}
         </ScrollView>
