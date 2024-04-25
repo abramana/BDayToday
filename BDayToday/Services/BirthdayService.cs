@@ -12,28 +12,28 @@ public class BirthdayService : IBirthdayService
         _repository = repository;
     }
 
-    public async Task<IEnumerable<BirthdayModel>> GetAllAsync()
+    public async Task<IEnumerable<BirthdayModel>> GetAll()
     {
         return await _repository.Get();
     }
 
-    public async Task<BirthdayModel?> GetByIdAsync(int id)
+    public async Task<BirthdayModel?> GetById(int id)
     {
         return await _repository.GetById(id);
     }
 
-    public async Task<bool> CreateAsync(BirthdayModel birthday)
+    public async Task<bool> Create(BirthdayModel birthday)
     {
         return await _repository.Create(birthday);
     }
 
-    public async Task<bool> UpdateAsync(BirthdayModel birthday)
+    public async Task<bool> Update(BirthdayModel birthday)
     {
         return await _repository.Update(birthday);
     }
 
-    public async Task<bool> DeleteAsync(BirthdayModel birthday)
+    public async Task<bool> DeleteById(int id)
     {
-        return await _repository.Delete(birthday);
+        return await _repository.DeleteById(id);
     }
 }
