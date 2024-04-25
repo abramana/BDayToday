@@ -7,15 +7,15 @@ namespace BDayToday.Endpoints;
 
 public class BirthdayEndpoints : IEndpoints
 {
-    private const string BaseRoute = "birthday";
+    private const string BaseRoute = "birthdays";
 
     public static void DefineEndpoints(IEndpointRouteBuilder app)
     {
         app.MapGet(BaseRoute, GetAllBirthdaysAsync);
         app.MapGet(BaseRoute + "/{id}", GetBirthdayByIdAsync);
         app.MapPost(BaseRoute, CreateBirthdayAsync);
-        app.MapPut(BaseRoute, UpdateBirthdayAsync);
-        app.MapDelete(BaseRoute, DeleteBirthdayAsync);
+        app.MapPut(BaseRoute + "/{id}", UpdateBirthdayAsync);
+        app.MapDelete(BaseRoute + "/{id}", DeleteBirthdayAsync);
     }
 
     public static void AddServices(IServiceCollection services, IConfiguration configuration)
