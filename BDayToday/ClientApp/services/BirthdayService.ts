@@ -38,3 +38,7 @@ export const updateBirthday = async (birthdayDetail: BirthdayDetail) => {
     const birthdate = removeOffset(birthdayDetail.birthdate);
     return axios.put(API_URL + "/" + birthdayDetail.id, {...birthdayDetail, birthdate});
 };
+
+export const deleteBirthday = async (birthdayId: number) => {
+    return axios.delete(API_URL + "/" + birthdayId);
+}

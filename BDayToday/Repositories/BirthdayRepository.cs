@@ -41,9 +41,11 @@ public class BirthdayRepository : IBirthdayRepository
         return await _ctx.SaveChangesAsync() > 0;
     }
 
-    public async Task<bool> Delete(BirthdayModel birthday)
+    public async Task<bool> DeleteById(int id)
     {
-        _ctx.Birthdays.Remove(birthday.ToBirthday());
-        return await _ctx.SaveChangesAsync() > 0;
+        return await _ctx
+            .Birthdays
+            .Where(b => b.Id == id)
+            .ExecuteDeleteAsync() > 0;
     }
 }

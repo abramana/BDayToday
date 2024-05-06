@@ -1,6 +1,10 @@
 import React, {useEffect} from 'react';
 import {View} from "react-native";
-import {getBirthdayById, updateBirthday} from "../services/BirthdayService";
+import {
+    deleteBirthday,
+    getBirthdayById,
+    updateBirthday
+} from "../services/BirthdayService";
 import BirthdayDetailComponent from "../components/BDayDetail/BirthdayDetailComponent";
 import {Button} from "react-native-paper";
 import {BirthdayDetail} from "../models/birthday-detail";
@@ -29,6 +33,12 @@ const ViewBirthdayScreen = ({ route }: ViewBirthdayScreenProps) => {
         }
     };
     
+    const handleDelete = async () => {
+        if (birthdayDetail) {
+            await deleteBirthday(birthdayDetail.id!);
+        }
+    }
+    
     const handleBirthdayDetailChange = (birthdayDetail: BirthdayDetail) => {
         setBirthdayDetail(birthdayDetail);
     }
@@ -38,7 +48,10 @@ const ViewBirthdayScreen = ({ route }: ViewBirthdayScreenProps) => {
             {birthdayDetail &&
                 <BirthdayDetailComponent birthdayDetail={birthdayDetail} onBirthdayDetailChange={handleBirthdayDetailChange}/>
             }
-            <Button mode="contained" onPress={handleSave} disabled={!birthdayDetail || !birthdayDetail?.name || !birthdayDetail?.birthdate}> Save </Button>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 10 }}>
+                <Button mode="contained" onPress={handleSave} disabled={!birthdayDetail || !birthdayDetail?.name || !birthdayDetail?.birthdate}> Save </Button>
+                <Button mode="contained" onPress={handleDelete}> Delete </Button>
+            </View>
         </View>
     );
 };
