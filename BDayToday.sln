@@ -2,6 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDayToday", "BDayToday\BDayToday.csproj", "{B411F7A1-40CE-4AEF-82B5-22BA236371A7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{5EA11AE9-C671-4134-B091-243163D51C85}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\Run-Database.ps1 = Scripts\Run-Database.ps1
+		Scripts\Run-Migrations.ps1 = Scripts\Run-Migrations.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

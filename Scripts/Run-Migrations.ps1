@@ -1,0 +1,1 @@
+dotnet ef database update --project BDayToday\BDayToday.csproj --startup-project BDayToday\BDayToday.csproj --context BDayToday.Data.ApplicationDbContext --configuration Debug 20240507112549_UserMigration
